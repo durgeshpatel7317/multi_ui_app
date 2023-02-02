@@ -1,0 +1,41 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: second_ui
+          uri: http://second-ui:8090/second
+          predicates:
+            - Path=/second/**
+          filters:
+            - RewritePath=/second(?<segment>/?.*), $\{segment}
+
+        - id: api_server
+          uri: http://api-service:9090
+          predicates:
+            - Path=/api-service/**
+          filters:
+            - RewritePath=/api-service(?<segment>/?.*), $\{segment}
+
+        - id: third_ui
+          uri: http://third-ui:8095/third
+          predicates:
+            - Path=/third/**
+          filters:
+            - RewritePath=/third(?<segment>/?.*), $\{segment}
+
+        - id: fourth_ui
+          uri: http://fourth-ui:8900/fourth
+          predicates:
+            - Path=/fourth/**
+          filters:
+            - RewritePath=/fourth(?<segment>/?.*), $\{segment}
+
+        - id: first_ui
+          uri: http://first-ui:8085
+          predicates:
+            - Path=/**

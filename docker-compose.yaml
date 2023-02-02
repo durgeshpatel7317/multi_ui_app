@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+  api-service:
+    build:
+      context: ./demo
+      dockerfile: Dockerfile
+  first-ui:
+    build:
+      context: ./first_ui
+      dockerfile: Dockerfile
+  second-ui:
+    build:
+      context: ./second_ui
+      dockerfile: Dockerfile
+  third-ui:
+    build:
+      context: ./third_ui
+      dockerfile: Dockerfile
+  fourth-ui:
+    build:
+      context: ./fourth_ui
+      dockerfile: Dockerfile
